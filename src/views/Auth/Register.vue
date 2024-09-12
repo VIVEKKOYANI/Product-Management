@@ -20,6 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import {useAuthStore} from '@/stores/authStore'
 type PAYLOAD = {
     email: string;
     password: string;
@@ -33,8 +34,10 @@ const form = ref<PAYLOAD>({
     role: 'ADMIN',
 });
 const router = useRouter();
+const store = useAuthStore();
 const onSubmit = async () => {
     try {
+        store.registerUser(form.value)
         router.push('/');
     } catch (error) {
         console.log(error);
